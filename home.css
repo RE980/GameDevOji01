@@ -8,9 +8,34 @@ body {
     height: 100vh;
     margin: 0;
 }
-button {
+.line {
+    
+}
+.container button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    margin: 20px;
+    margin: 10px;
+    border-radius: 10px;
+}
+.container button:hover {
+    background-color: #7fd494; /* ホバー時の背景色を変更 */
+}
+.container {
+    display: flex; /* 要素を縦に並べるためのフレックスボックス */
+    flex-direction: column; /* 要素を縦に並べる */
+    align-items: center; /* 要素を中央に配置する */
+    margin-left: 50px;
+}
+
+#point {
+    margin-bottom: 20px; /* ボタンとの間隔を設定 */
+    font-size: 24px;
+}
+.container {
+    display: flex; /* 要素を横に並べるためのフレックスボックス */
+    align-items: center; /* 要素を中央に配置する */
+}
+#picture{
+   transform: scale(-1,1);
 }
