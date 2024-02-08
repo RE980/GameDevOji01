@@ -10,19 +10,102 @@
     <div id="training-container">
         <div id="ojisan-info">
             <h2>おじさん情報</h2>
-            <img id="ojisan-image" src="images/level1.jpg" alt="Ojisan">
-            <div id="level">レベル: <span id="current-level">1</span></div>
-            <div id="exp">経験値: <span id="current-exp">0</span></div>
-            <div id="next-level-exp">次のレベルまで: <span id="required-exp">10</span></div>
-            <div id="total-exp">累計経験値: <span id="total-exp-points">0</span></div>
-            <div id="point">現在の所持ポイント:<span id="currentpoint">0</span></div>
+            <img id="ojisan-image" src="おじ.png" alt="Ojisan">
+            <div>レベル: <span id="current-level">1</span></div>
+            <div>経験値: <span id="current-exp">0</span></div>
+            <div>次のレベルに必要な経験値: <span id="required-exp">10</span></div>
+            <div>累計経験値: <span id="total-exp-points">0</span></div>
+            <div>現在の所持ポイント: <span id="points-display">0</span></div>
         </div>
         <div id="item-store">
             <h2>アイテムストア</h2>
-            <!-- ここにアイテムが表示される -->
+            <!-- アイテムが表示される -->
         </div>
     </div>
 
     <script src="ojiTrain.js"></script>
+    <script>
+        // 初期化処理
+        let points = 100;
+        let exp = 0;
+        let totalExp = 0;
+        const pointsDisplay = document.getElementById('points-display');
+        const itemStore = document.getElementById('item-store');
+
+        // アイテムを購入する関数
+        function buyItem(expPoints, price) {
+            if (points >= price) {
+                exp += expPoints;
+                totalExp += expPoints;
+                updateOjisanInfo();
+                points -= price;
+                updatePointsDisplay();
+            } else {
+                alert('ポイントが足りません！');
+            }
+        }
+
+        // おじさん情報を更新する関数
+        function updateOjisanInfo() {
+            currentExp.textContent = exp;
+            totalExpPoints.textContent = totalExp;
+            if (exp >= 30 && exp < 100) {
+                currentLevel.textContent = '2';
+                ojisanImage.src = 'images/level2.jpg';
+                requiredExp.textContent = '100';
+            } else if (exp >= 100 && exp < 300) {
+                currentLevel.textContent = '3';
+                ojisanImage.src = 'images/level3.jpg';
+                requiredExp.textContent = '300';
+            } else if (exp >= 300 && exp < 600) {
+                currentLevel.textContent = '4';
+                ojisanImage.src = 'images/level4.jpg';
+                requiredExp.textContent = '600';
+            } else if (exp >= 600) {
+                currentLevel.textContent = '5';
+                ojisanImage.src = 'images/level5.jpg';
+                requiredExp.textContent = '---';
+            }
+        }
+
+        // ポイント表示を更新する関数
+        function updatePointsDisplay() {
+            pointsDisplay.textContent = points;
+        }
+
+        // アイテムストアを生成する関数
+        function createItemStore() {
+            const items = [
+                { name: 'ビール', exp: 1, price: 1 },
+                { name: 'ウイスキー', exp: 3, price: 2 },
+                { name: 'ネクタイ', exp: 5, price: 3 },
+                { name: '革靴', exp: 7, price: 4 },
+                { name: '香水', exp: 9, price: 5 },
+                { name: 'スーツ', exp: 11, price: 6 },
+                { name: 'バイク', exp: 13, price: 7 },
+                { name: '高級腕時計', exp: 15, price: 8 },
+                { name: '高級スーツ', exp: 17, price: 9 },
+                { name: '高級車', exp: 20, price: 10 }
+            ];
+
+            items.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('item');
+                itemElement.textContent = `${item.name} (${item.price}ポイント)`;
+
+                const buyButton = document.createElement('button');
+                buyButton.textContent = '購入';
+                buyButton.addEventListener('click', () => buyItem(item.exp, item.price));
+
+                itemElement.appendChild(buyButton);
+                itemStore.appendChild(itemElement);
+            });
+        }
+
+        // ページロード時の処理
+        window.addEventListener('load', () => {
+            createItemStore();
+        });
+    </script>
 </body>
 </html>
