@@ -11,7 +11,7 @@
 
 <body>
     <h1>おぢタイピング</h1>
-    <div id="timer">残り時間:<span id="countdown">45</span></div>
+    <div id="timer">残り時間:<span id="countdown">30</span></div>
     <div id="point">現在の所持ポイント:<span id="currentpoint">0</span></div>
     <div id="result">　</div>
     <div id="message">
@@ -79,7 +79,7 @@
             startButton.disabled = true;
             inputElement.disabled = false;
             inputElement.focus();
-            countdownTime = 45;
+            countdownTime = 30;
             correctCount = 0;
             npoint = 0;
             resultElement.textContent = '';
@@ -121,7 +121,7 @@
             if (event.key === 'Enter') {
                 if (inputElement.value.trim() === message.trim()) {
                     resultElement.textContent = '正解！';
-                    countdownTime = 45;
+                    countdownTime = 30;
                     correctCount++;
                     point++;
                     npoint++;
