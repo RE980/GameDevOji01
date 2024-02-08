@@ -10,6 +10,27 @@ let points = 100;
 let exp = 0;
 let totalExp = 0;
 
+
+function redirectToHome() {
+    window.location.href = 'home.html?point=' + document.getElementById('currentpoint').textContent;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // URLパラメータからポイントの値を取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const pointValue = urlParams.get('point') || '0';
+
+    // ポイントの値を表示
+    const pointElement = document.getElementById('currentpoint');
+    pointElement.textContent = pointValue || '0'; // ポイントがない場合は0と表示
+
+    let point = parseInt(pointValue, 10) || 0;
+
+    // 関数内でも使えるようにグローバルに代入
+    window.point = point;
+});
+
+
 // アイテムを購入する関数
 function buyItem(expPoints, price) {
     if (points >= price) {
@@ -69,17 +90,14 @@ function createItemStore() {
     items.forEach(item => {
         const itemElement = document.createElement('div');
         itemElement.classList.add('item');
-        itemElement.textContent = `アイテム${item.exp} (${item.price}ポイント)`;
-        itemElement.dataset.exp = item.exp;
+        itemElement.textContent = `EXP +${item.exp} (${item.price}ポイント)`;
 
-        const buyButton = document.createElement('button'); // 購入ボタンを作成
+        const buyButton = document.createElement('button');
         buyButton.textContent = '購入';
         buyButton.classList.add('buy-btn');
-        buyButton.addEventListener('click', () => {
-            buyItem(item.exp, item.price); // アイテムを購入する関数を呼び出す
-        });
+        buyButton.addEventListener('click', () => buyItem(item.exp, item.price));
 
-        itemElement.appendChild(buyButton); // アイテム要素に購入ボタンを追加
+        itemElement.appendChild(buyButton);
         itemStore.appendChild(itemElement);
     });
 }
