@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: lightpink;
+}
+html{
+    margin: 0;
+}
+h1{
+    text-align: center;
+    color: white;
+    padding: 10px;
+    margin: 0;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    font-size: 40px;
+}
+#message {
+    font-size: 20px;
+    /* margin-bottom: 20px; */
+    background-color: white;
+    width: 50%;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+}
+#timer {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: right;
+    margin-right: 100px;
+}
+#level {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+#result {
+    font-size: 18px;
+    position:absolute;
+    top:140px;
+    left:50%;
+    transform:translateX(-48%);
+}
+#input {
+    margin-bottom: 20px;
+    padding: 30px;
+    width: 40%;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.container {
+    display: flex; /* 要素を横に並べるためのフレックスボックス */
+    justify-content: center; /* 要素を中央に配置する */
+}
+
+.container button {
+    margin: 0 10px; /* ボタン間の間隔を設定 */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px; /* ボタンの上部に余白を追加 */
+    border-radius: 10px;
+}
+#point{
+    text-align: right;
+    margin-right: 100px;
+}
+#picture{
+    width: 10%;
+    height: 10%;
+    margin-right: 20px;
+    float: right; /* 右に寄せる */
+
+}

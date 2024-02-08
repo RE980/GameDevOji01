@@ -1,0 +1,40 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おじタイピング</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <div id="point">現在の所持ポイント:<span id="currentpoint">0</span></div>
+    <button id="startButton">ゲームスタート</button>
+    <button id="shoppingButton">ショッピング</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // URLパラメータからポイントの値を取得
+            const urlParams = new URLSearchParams(window.location.search);
+            const pointValue = urlParams.get('point') || '0';
+
+            // ポイントの値を表示
+            const pointElement = document.getElementById('currentpoint');
+            pointElement.textContent = pointValue || '0'; // ポイントがない場合は0と表示
+        });
+
+        document.getElementById('startButton').addEventListener('click', function () {
+            // ゲームスタートボタンがクリックされた時の処理
+            window.location.href = 'index.html?point=' + document.getElementById('currentpoint').textContent;
+        });
+
+        document.getElementById('shoppingButton').addEventListener('click', function () {
+            // ショッピングボタンがクリックされた時の処理
+            window.location.href = 'shopping.html';
+        });
+    </script>
+</body>
+
+</html>

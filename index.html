@@ -1,0 +1,126 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おじタイピング</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>おじタイピング</h1>
+    <div id="timer">残り時間:<span id="countdown">30</span></div>
+    <div id="point">現在の所持ポイント:<span id="currentpoint">0</span></div>
+    <div id="result">　</div>
+    <div id="message">スタートを押して開始</div>
+    <input type="text" id="input" disabled>
+    <div class="container">
+        <button onclick="startGame()">スタート</button>
+        <button onclick="redirectToHome()">ホームに戻る</button>
+    </div>
+    <img id="picture" src="おじ.png">
+
+    <script>
+        function redirectToHome() {
+            window.location.href = 'home.html?point=' + document.getElementById('currentpoint').textContent;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // URLパラメータからポイントの値を取得
+            const urlParams = new URLSearchParams(window.location.search);
+            const pointValue = urlParams.get('point') || '0';
+
+            // ポイントの値を表示
+            const pointElement = document.getElementById('currentpoint');
+            pointElement.textContent = pointValue || '0'; // ポイントがない場合は0と表示
+
+            let point = parseInt(pointValue, 10) || 0;
+
+            // 関数内でも使えるようにグローバルに代入
+            window.point = point;
+        });
+
+        const messages = [
+            "ああ",
+            "いい",
+            "うう",
+            "ええ",
+            "おお",
+            "ええ",
+            "おお"
+        ];
+        let currentMessageIndex = 0;
+        let countdownTime = 0;
+        let correctCount = 0;
+        //let point = 0;  ポイントの初期化をここで行う
+
+        function startGame() {
+            const messageElement = document.getElementById('message');
+            const countdownElement = document.getElementById('countdown');
+            const pointElement = document.getElementById('currentpoint');
+            const resultElement = document.getElementById('result');
+            const inputElement = document.getElementById('input');
+            const startButton = document.querySelector('button');
+
+            startButton.disabled = true;
+            inputElement.disabled = false;
+            inputElement.focus();
+            countdownTime = 30;
+            correctCount = 0;
+            npoint = 0;
+            resultElement.textContent = '';
+
+            const timer = setInterval(() => {
+                countdownTime--;
+                countdownElement.textContent = countdownTime;
+                if (countdownTime === 0) {
+                    clearInterval(timer);
+                    startButton.disabled = false;
+                    inputElement.disabled = true;
+                    resultElement.textContent = '時間切れ！今回の獲得ポイントは ' + npoint;
+                    messageElement.textContent = 'スタートを押してください';
+                    inputElement.value = '';
+                    return;
+                }
+            }, 1000);
+
+            showMessage();
+        }
+
+        function showMessage() {
+            const messageElement = document.getElementById('message');
+            currentMessageIndex = Math.floor(Math.random() * messages.length);
+            messageElement.textContent = messages[currentMessageIndex];
+        }
+
+        function checkInput(event) {
+            const inputElement = document.getElementById('input');
+            const message = messages[currentMessageIndex];
+            const resultElement = document.getElementById('result');
+            const pointElement = document.getElementById('currentpoint');
+
+            if (event.key === 'Enter') {
+                if (inputElement.value.trim() === message.trim()) {
+                    resultElement.textContent = '正解！';
+                    correctCount++;
+                    if (correctCount === 5) {
+                        point++;
+                        npoint++;
+                        correctCount = 0;
+                        pointElement.textContent = point;
+                    }
+                    showMessage();
+                    inputElement.value = '';
+                } else {
+                    resultElement.textContent = '失敗…… もう一度入力してください';
+                }
+            }
+        }
+
+        document.getElementById('input').addEventListener('keypress', checkInput);
+    </script>
+</body>
+
+</html>
