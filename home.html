@@ -1,3 +1,4 @@
+<!-- home.html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,10 +10,15 @@
 </head>
 
 <body>
+    <img id="picture" src="おじ2.png">
+    <div class="container">
     <div id="point">現在の所持ポイント:<span id="currentpoint">0</span></div>
-    <button id="startButton">ゲームスタート</button>
-    <button id="shoppingButton">ショッピング</button>
-
+    <div class="c1">
+        <button id="startButton">ゲームスタート</button>
+        <button id="shoppingButton">ショッピング</button>
+    </div>
+    <p class="line">※ 記号、！ と ？ は半角で入力してね (*´з`)</p>
+</div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // URLパラメータからポイントの値を取得
@@ -31,7 +37,7 @@
 
         document.getElementById('shoppingButton').addEventListener('click', function () {
             // ショッピングボタンがクリックされた時の処理
-            window.location.href = 'ojiTrain.html';
+            window.location.href = 'shopping.html';
         });
     </script>
 </body>
