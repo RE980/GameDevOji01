@@ -10,17 +10,20 @@
 </head>
 
 <body>
-    <h1>おじタイピング</h1>
+    <h1>おぢタイピング</h1>
     <div id="timer">残り時間:<span id="countdown">30</span></div>
     <div id="point">現在の所持ポイント:<span id="currentpoint">0</span></div>
     <div id="result">　</div>
-    <div id="message">スタートを押して開始</div>
+    <div id="message">
+        <div id="message1">スタートを押してネ((^_-)-☆</div>
+    </div>
     <input type="text" id="input" disabled>
     <div class="container">
         <button onclick="startGame()">スタート</button>
         <button onclick="redirectToHome()">ホームに戻る</button>
     </div>
     <img id="picture" src="おじ.png">
+    <img id="picture2" src="おじ.png">
 
     <script>
         function redirectToHome() {
@@ -43,14 +46,21 @@
         });
 
         const messages = [
-            "ああ",
-            "いい",
-            "うう",
-            "ええ",
-            "おお",
-            "ええ",
-            "おお"
+            "おっは〜(^_^)ちょっと電話できるカ!?今日はよく休んデネ",
+            "一緒に今度ランチ、したいなァ 風邪ひかないようにネ",
+            "お早う!早く会いたいナ(^з<)",
+            "お疲れ様〜!早く会いたい、な(^_^)",
+            "マッタクもう、天気が良くて嬉しいね!",
+            "おぢさんは今日、おいしいラーメンを食べたよ〜",
+            "オハヨウ〜(^^)ボクは今日から福島ヘ〜(^o^)",
         ];
+
+        const messages2 = [
+            "髪の毛、切った、のかな（￣ー￣?）似合いすぎダヨ  おじさん、本当に女優さんかと思っちゃったよ",
+            "髪の毛、切ったのかな⁉似合いすぎダヨ（笑）ホント可愛すぎだよ〜(^o^)マッタクもう、",
+            "おはよー！日曜日は仕事〜⁉日曜日、会社がお休みになったよ(^з<)○○チャンは都合どうかな!?ドライブドウなんてね",
+            "オッハー(笑)今日はもう寝ちゃったのカナ？天気悪いと気分もよくないよね(T_T)じゃあ今日は会社休んでボクとカラオケしヨウ(^o^)"
+        ]
         let currentMessageIndex = 0;
         let countdownTime = 0;
         let correctCount = 0;
@@ -67,7 +77,7 @@
             startButton.disabled = true;
             inputElement.disabled = false;
             inputElement.focus();
-            countdownTime = 30;
+            countdownTime = 45;
             correctCount = 0;
             npoint = 0;
             resultElement.textContent = '';
@@ -79,8 +89,8 @@
                     clearInterval(timer);
                     startButton.disabled = false;
                     inputElement.disabled = true;
-                    resultElement.textContent = '時間切れ！今回の獲得ポイントは ' + npoint;
-                    messageElement.textContent = 'スタートを押してください';
+                    resultElement.textContent = 'おつかれさま！今回のポイントは ' + npoint + 'だヨ';
+                    messageElement.textContent = 'スタートを押してネ((^_-)-☆';
                     inputElement.value = '';
                     return;
                 }
@@ -91,8 +101,13 @@
 
         function showMessage() {
             const messageElement = document.getElementById('message');
-            currentMessageIndex = Math.floor(Math.random() * messages.length);
-            messageElement.textContent = messages[currentMessageIndex];
+            if (correctCount < 5) {
+                currentMessageIndex = Math.floor(Math.random() * messages.length);
+                messageElement.textContent = messages[currentMessageIndex];
+            }else{
+                currentMessageIndex = Math.floor(Math.random() * message2s.length);
+                messageElement.textContent = messages2[currentMessageIndex];
+            }
         }
 
         function checkInput(event) {
@@ -104,6 +119,7 @@
             if (event.key === 'Enter') {
                 if (inputElement.value.trim() === message.trim()) {
                     resultElement.textContent = '正解！';
+                    countdownTime = 45;
                     correctCount++;
                     if (correctCount === 5) {
                         point++;

@@ -66,9 +66,18 @@ h1{
     margin-right: 100px;
 }
 #picture{
-    width: 10%;
-    height: 10%;
-    margin-right: 20px;
-    float: right; /* 右に寄せる */
+    position:fixed;
+    width: 100px;
+    height: 150px;
+    right:100px;
+    bottom:150px;
 
+}
+#picture2 {
+    transform: scale(-1, 1);
+    position:fixed;
+    width: 100px;
+    height: 150px;
+    left:100px;
+    bottom:150px;
 }
