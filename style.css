@@ -56,10 +56,13 @@ h1{
 .container button {
     margin: 0 10px; /* ボタン間の間隔を設定 */
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
     margin-top: 20px; /* ボタンの上部に余白を追加 */
     border-radius: 10px;
+}
+.container button:hover {
+    background-color: #7fd494; /* ホバー時の背景色を変更 */
 }
 #point{
     text-align: right;
